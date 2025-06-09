@@ -36,7 +36,7 @@ def main():
             "url": commit["html_url"]
         }
         producer.send(KAFKA_TOPIC, data)
-        print(f"📤 Sent commit {data['commit_sha']}")
+        print(f"Sent commit {data['commit_sha']}")
     producer.flush()
 
 if __name__ == "__main__":
