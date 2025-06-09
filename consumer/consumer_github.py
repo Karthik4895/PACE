@@ -30,10 +30,10 @@ def main():
     conn = psycopg2.connect(**POSTGRES_CONFIG)
     cursor = conn.cursor()
 
-    print(f"🟢 Listening to topic: {KAFKA_TOPIC}")
+    print(f"Listening to topic: {KAFKA_TOPIC}")
     for message in consumer:
         data = message.value
-        print(f"📥 Received: {data}")
+        print(f"Received: {data}")
         try:
             cursor.execute("""
                 INSERT INTO github_commits (
@@ -50,9 +50,9 @@ def main():
                 data["url"]
             ))
             conn.commit()
-            print(f"✅ Stored commit {data['commit_sha']}")
+            print(f"Stored commit {data['commit_sha']}")
         except Exception as e:
-            print(f"❌ Failed to insert: {e}")
+            print(f"Failed to insert: {e}")
             conn.rollback()
 
 if __name__ == "__main__":
